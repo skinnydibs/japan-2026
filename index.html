@@ -104,6 +104,7 @@
   .tag-rest   { background:var(--rest-bg); color:#7a6030; }
   .tag-warn   { background:var(--warn-bg); color:var(--warn); }
   .tag-new    { background:var(--sug-bg); color:var(--sug); }
+  .tag-wx     { background:#e8eef4; color:#2d4a62; }
 
   .day-chevron { display:flex; align-items:center; padding:0 .85rem; color:var(--border); transition:transform .2s,color .2s; font-size:.82rem; }
   .day-card.open .day-chevron { transform:rotate(180deg); color:var(--muted); }
@@ -242,6 +243,19 @@
     .timeline,.rest-block,.memory-block,.nature-block,.shop-block,.gem-block { padding-left:.8rem; margin-left:.8rem; }
     .trip-stats { gap:1.2rem; }
     .day-num-block { width:56px; }
+    .tab-btn { min-height:44px; }
+  }
+
+  /* ── FOCUS / HOVER ── */
+  .tab-btn:hover:not(.active) { color:var(--ink); border-bottom-color:rgba(26,20,16,.2); }
+  .tab-btn:focus-visible { outline:2px solid var(--ink); outline-offset:2px; border-radius:2px; }
+  .day-header:focus-visible { outline:2px solid var(--ink); outline-offset:-2px; }
+  .map-link:focus-visible { outline:2px solid var(--blue); outline-offset:1px; }
+  .cl-cb:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+
+  /* ── REDUCED MOTION ── */
+  @media (prefers-reduced-motion: reduce) {
+    .day-card, .day-chevron, .cl-cb, .tab-btn { transition: none !important; }
   }
 </style>
 </head>
@@ -306,7 +320,7 @@
     <div class="hotel-badge">🏨 <strong>Hotel Nikko KIX</strong> — connected to the terminal. No transfer needed.</div>
     <div class="timeline">
       <div class="tl-item go"><div class="tl-time">4:10 PM</div><div class="tl-act">Land at KIX</div><div class="tl-note">Immigration + baggage ~45–60 min. Hotel is a walkway away.</div></div>
-      <div class="tl-item eat"><div class="tl-time">6:00 – 7:30 PM</div><div class="tl-act">Dinner — Rinku Premium Outlets or hotel restaurant <a class="map-link" href="https://maps.google.com/?q=Rinku+Premium+Outlets+Osaka" target="_blank">📍 Map</a></div><div class="tl-note">Keep it easy. Everyone's tired. Early bed is the goal.</div></div>
+      <div class="tl-item eat"><div class="tl-time">6:00 – 7:30 PM</div><div class="tl-act">Dinner — Rinku Premium Outlets or hotel restaurant <a class="map-link" href="https://maps.google.com/?q=Rinku+Premium+Outlets+Osaka" target="_blank" rel="noopener noreferrer">📍 Map</a></div><div class="tl-note">Keep it easy. Everyone's tired. Early bed is the goal.</div></div>
       <div class="tl-item rest"><div class="tl-time">7:30 PM</div><div class="tl-act">Early night 🌙</div><div class="tl-note">Aim for 7:30–8:00 PM kid bedtime. Big day tomorrow — Haruka departs 7:41 AM.</div></div>
     </div>
   </div>
@@ -344,7 +358,7 @@
       <div class="tl-item go"><div class="tl-time">7:56 AM</div><div class="tl-act">🚄 JR Haruka 6 — KIX → Kyoto (arr. 9:34 AM)</div><div class="tl-note"><strong>Reservation No. 46509 · Receipt ADL5634K</strong><br>Car 4 · Seats 7-A (Lynn) and 7-B (James) · Hugo free, no ticket needed, sits between you<br>Ordinary reserved car, non-smoking<br>~98 min journey. Watch the countryside, konbini snacks for the ride.</div></div>
       <div class="tl-item"><div class="tl-time">9:34 AM</div><div class="tl-act">Arrive Kyoto Station</div><div class="tl-note">Head straight to 22 Pieces Hotel (~8 min walk south of the station) to drop luggage. Check-in is 4 PM — just leave bags at reception.</div></div>
       <div class="tl-item"><div class="tl-time">~9:45 AM</div><div class="tl-act">Drop luggage at 22 Pieces Hotel + pick up BabyCal stroller at Kyoto Station</div><div class="tl-note">BabyCal rental counter is inside Kyoto Station. Grab stroller before heading to the museum.</div></div>
-      <div class="tl-item go"><div class="tl-time">~10:00 AM</div><div class="tl-act">Walk to Kyoto Railway Museum (~20 min through Umekoji Park) <a class="map-link" href="https://maps.google.com/?q=Kyoto+Railway+Museum" target="_blank">📍 Map</a></div><div class="tl-note">Or take the 3-min San-In Line to Umekoji-Kyotonishi if legs are tired — ¥150, tap IC card.</div></div>
+      <div class="tl-item go"><div class="tl-time">~10:00 AM</div><div class="tl-act">Walk to Kyoto Railway Museum (~20 min through Umekoji Park) <a class="map-link" href="https://maps.google.com/?q=Kyoto+Railway+Museum" target="_blank" rel="noopener noreferrer">📍 Map</a></div><div class="tl-note">Or take the 3-min San-In Line to Umekoji-Kyotonishi if legs are tired — ¥150, tap IC card.</div></div>
       <div class="tl-item kids"><div class="tl-time">10:20 AM – 12:30 PM</div><div class="tl-act">🚂 Kyoto Railway Museum</div>
         <div class="tl-note">You'll arrive ~20 min after opening — head straight to the driving simulator desk to join the queue. ¥100, book online in advance if possible.</div>
         <div class="tl-tags"><span class="tag tag-kids">Kids</span></div>
@@ -378,7 +392,7 @@
       <p>Kyoto Station B1 food hall + The Cube shopping floors (B2–11F). Isetan department store attached to the station for cosmetics and fashion. All in one building, no walking required.</p>
     </div>
     <div class="timeline">
-      <div class="tl-item eat"><div class="tl-time">5:30 – 7:00 PM</div><div class="tl-act">Dinner — Kyoto Station B1 food hall or Teramachi side streets <a class="map-link" href="https://maps.google.com/?q=Kyoto+Station+Ramen+Street" target="_blank">📍 Map</a></div><div class="tl-note">No marathon walks tonight. Keep it within 10 min of hotel.</div></div>
+      <div class="tl-item eat"><div class="tl-time">5:30 – 7:00 PM</div><div class="tl-act">Dinner — Kyoto Station B1 food hall or Teramachi side streets <a class="map-link" href="https://maps.google.com/?q=Kyoto+Station+Ramen+Street" target="_blank" rel="noopener noreferrer">📍 Map</a></div><div class="tl-note">No marathon walks tonight. Keep it within 10 min of hotel.</div></div>
     </div>
   </div>
 </div>
@@ -404,7 +418,7 @@
     <div class="timeline">
       <div class="tl-item"><div class="tl-time">6:30 – 7:15 AM</div><div class="tl-act">Breakfast</div><div class="tl-note">✦ Konbini breakfast ritual day 2 — Lawson or 7-Eleven near the hotel. He picks his item.</div></div>
       <div class="tl-item go"><div class="tl-time">7:30 AM</div><div class="tl-act">JR Kyoto → Inari (~5 min, Platform 10, JR Nara Line)</div></div>
-      <div class="tl-item hl"><div class="tl-time">8:00 – 9:15 AM</div><div class="tl-act">⛩ Fushimi Inari Shrine <a class="map-link" href="https://maps.google.com/?q=Fushimi+Inari+Shrine+Kyoto" target="_blank">📍 Map</a></div>
+      <div class="tl-item hl"><div class="tl-time">8:00 – 9:15 AM</div><div class="tl-act">⛩ Fushimi Inari Shrine <a class="map-link" href="https://maps.google.com/?q=Fushimi+Inari+Shrine+Kyoto" target="_blank" rel="noopener noreferrer">📍 Map</a></div>
         <div class="tl-note">Open 24h. Go early — crowds arrive by 9:30 AM. Walk the lower torii tunnel, find the fox statues (kitsune), let him run between the gates. Turn back at Yotsutsuji.</div>
       </div>
     </div>
@@ -418,14 +432,14 @@
     </div>
     <div class="timeline">
       <div class="tl-item go"><div class="tl-time">9:30 AM</div><div class="tl-act">JR Inari → Uji (~16 min, JR Nara Line — stay on the same train)</div><div class="tl-note">BabyCal stroller at Uji Station.</div></div>
-      <div class="tl-item hl"><div class="tl-time">10:00 – 11:00 AM</div><div class="tl-act">🏯 Byodoin Temple <a class="map-link" href="https://maps.google.com/?q=Byodoin+Temple+Uji+Kyoto" target="_blank">📍 Map</a></div><div class="tl-note">Hours: 8:30–17:30. Show him the ¥10 coin and match it to the Phoenix Hall. Grounds stroller-friendly. Skip the interior museum if he's restless.</div></div>
+      <div class="tl-item hl"><div class="tl-time">10:00 – 11:00 AM</div><div class="tl-act">🏯 Byodoin Temple <a class="map-link" href="https://maps.google.com/?q=Byodoin+Temple+Uji+Kyoto" target="_blank" rel="noopener noreferrer">📍 Map</a></div><div class="tl-note">Hours: 8:30–17:30. Show him the ¥10 coin and match it to the Phoenix Hall. Grounds stroller-friendly. Skip the interior museum if he's restless.</div></div>
     </div>
     <div class="nature-block">
       <div class="nat-label">🌿 For James</div>
       <p>The Uji river walk after Byodoin is genuinely beautiful in mid-April. Cherry blossom petals may still be falling depending on timing. Flat, uncrowded path along the river — worth 20 min of wandering while the others browse matcha shops.</p>
     </div>
     <div class="timeline">
-      <div class="tl-item eat"><div class="tl-time">11:00 AM – 12:30 PM</div><div class="tl-act">Lunch + matcha snacks, Uji town <a class="map-link" href="https://maps.google.com/?q=Nakamura+Tokichi+Uji+Kyoto" target="_blank">📍 Nakamura Tokichi</a></div><div class="tl-note">Matcha soft serve is kid-approved and everywhere. Slow lunch = start of rest window.</div></div>
+      <div class="tl-item eat"><div class="tl-time">11:00 AM – 12:30 PM</div><div class="tl-act">Lunch + matcha snacks, Uji town <a class="map-link" href="https://maps.google.com/?q=Nakamura+Tokichi+Uji+Kyoto" target="_blank" rel="noopener noreferrer">📍 Nakamura Tokichi</a></div><div class="tl-note">Matcha soft serve is kid-approved and everywhere. Slow lunch = start of rest window.</div></div>
     </div>
     <div class="rest-block">😴 <div><strong>Rest window 12:30 – 2:30 PM</strong> — stroller push along the Uji river. He won't sleep but the fresh air and movement after lunch does the job. Sit in a matcha café if it's warm. Leave Uji by 2:30 PM.</div></div>
     <div class="shop-block">
@@ -435,7 +449,7 @@
     <div class="timeline">
       <div class="tl-item go"><div class="tl-time">2:30 – 3:00 PM</div><div class="tl-act">JR Uji → Kyoto (~17 min)</div></div>
       <div class="tl-item"><div class="tl-time">3:00 – 5:00 PM</div><div class="tl-act">Back to hotel — room time, konbini run</div></div>
-      <div class="tl-item eat"><div class="tl-time">5:30 – 7:00 PM</div><div class="tl-act">🍜 Dinner — Kyoto Station Ramen Street (10F) <a class="map-link" href="https://maps.google.com/?q=Kyoto+Station+Ramen+Street" target="_blank">📍 Map</a></div><div class="tl-note">Multiple styles, no deciding in advance, easy with stroller.</div></div>
+      <div class="tl-item eat"><div class="tl-time">5:30 – 7:00 PM</div><div class="tl-act">🍜 Dinner — Kyoto Station Ramen Street (10F) <a class="map-link" href="https://maps.google.com/?q=Kyoto+Station+Ramen+Street" target="_blank" rel="noopener noreferrer">📍 Map</a></div><div class="tl-note">Multiple styles, no deciding in advance, easy with stroller.</div></div>
     </div>
   </div>
 </div>
@@ -476,9 +490,9 @@
       <p>Arashiyama is the nature day of the trip. The Oi River, Togetsukyo bridge, forested hills, Tenryu-ji garden (UNESCO-listed moss and pond garden, mid-April is peak). After the rickshaw, a 20-min walk along the riverside towards the mountains gives you views you won't find in central Kyoto.</p>
     </div>
     <div class="timeline">
-      <div class="tl-item hl"><div class="tl-time">10:30 – 11:30 AM</div><div class="tl-act">🎋 Walk the bamboo grove + Nonomiya Shrine <a class="map-link" href="https://maps.google.com/?q=Arashiyama+Bamboo+Grove+Kyoto" target="_blank">📍 Map</a></div><div class="tl-note">After the rickshaw, walk the public path on foot. Morning is still relatively quiet. Nonomiya Shrine is tiny and beautiful — 5 min detour.</div></div>
+      <div class="tl-item hl"><div class="tl-time">10:30 – 11:30 AM</div><div class="tl-act">🎋 Walk the bamboo grove + Nonomiya Shrine <a class="map-link" href="https://maps.google.com/?q=Arashiyama+Bamboo+Grove+Kyoto" target="_blank" rel="noopener noreferrer">📍 Map</a></div><div class="tl-note">After the rickshaw, walk the public path on foot. Morning is still relatively quiet. Nonomiya Shrine is tiny and beautiful — 5 min detour.</div></div>
       <div class="tl-item kids"><div class="tl-time">11:15 AM – 12:30 PM</div>
-        <div class="tl-act">🐒 Iwatayama Monkey Park ✅ Going <a class="map-link" href="https://maps.google.com/?q=Iwatayama+Monkey+Park+Arashiyama+Kyoto" target="_blank">📍 Map</a></div>
+        <div class="tl-act">🐒 Iwatayama Monkey Park ✅ Going <a class="map-link" href="https://maps.google.com/?q=Iwatayama+Monkey+Park+Arashiyama+Kyoto" target="_blank" rel="noopener noreferrer">📍 Map</a></div>
         <div class="tl-note">10–15 min uphill walk from Togetsukyo Bridge — he walks up himself, that's part of it. ~200 wild Japanese macaques. You feed them from inside a cage (reversed — humans inside, monkeys outside). Pay at the gate, no pre-booking needed. ¥550 adults, ¥250 children (3–15).</div>
         <div class="tl-tags"><span class="tag tag-kids">Kids</span><span class="tag tag-temple">No pre-book needed</span></div>
       </div>
@@ -489,7 +503,7 @@
       No reservation needed — pay at the gate. But factor the 10–15 min uphill walk each way into timing. With the rickshaw finishing ~11 AM and the uphill walk, you'll enter the park around 11:20 AM. Give him 45–60 min inside, then descend for a 12:30–1:00 PM lunch. Don't rush him at the top.</div>
     </div>
     <div class="timeline">
-      <div class="tl-item eat"><div class="tl-time">12:30 – 2:00 PM</div><div class="tl-act">Lunch — Arashiyama village <a class="map-link" href="https://maps.google.com/?q=Arashiyama+Sagano+restaurants+Kyoto" target="_blank">📍 Map</a></div><div class="tl-note">Plenty of options along Saga-Toriimoto street. Tofu kaiseki is the local specialty. Or grab from a food stall near the bridge.</div></div>
+      <div class="tl-item eat"><div class="tl-time">12:30 – 2:00 PM</div><div class="tl-act">Lunch — Arashiyama village <a class="map-link" href="https://maps.google.com/?q=Arashiyama+Sagano+restaurants+Kyoto" target="_blank" rel="noopener noreferrer">📍 Map</a></div><div class="tl-note">Plenty of options along Saga-Toriimoto street. Tofu kaiseki is the local specialty. Or grab from a food stall near the bridge.</div></div>
     </div>
     <div class="rest-block">😴 <div><strong>Rest window 2:00 – 3:30 PM</strong> — stroller walk along the Oi River. Flat path, open air, he'll zone out or sleep. This is also James's nature time — the riverside backed by forested hills is genuinely beautiful.</div></div>
     <div class="shop-block">
@@ -498,7 +512,7 @@
     </div>
     <div class="timeline">
       <div class="tl-item go"><div class="tl-time">3:30 PM</div><div class="tl-act">JR Saga-Arashiyama → Kyoto Station (~20 min)</div></div>
-      <div class="tl-item eat"><div class="tl-time">5:30 – 7:00 PM</div><div class="tl-act">Dinner — Teramachi / Kawaramachi side streets <a class="map-link" href="https://maps.google.com/?q=Teramachi+Street+Kyoto" target="_blank">📍 Map</a></div><div class="tl-note">Good energy day — dinner can be relaxed, tomorrow is Nara.</div></div>
+      <div class="tl-item eat"><div class="tl-time">5:30 – 7:00 PM</div><div class="tl-act">Dinner — Teramachi / Kawaramachi side streets <a class="map-link" href="https://maps.google.com/?q=Teramachi+Street+Kyoto" target="_blank" rel="noopener noreferrer">📍 Map</a></div><div class="tl-note">Good energy day — dinner can be relaxed, tomorrow is Nara.</div></div>
     </div>
   </div>
 </div>
@@ -527,7 +541,7 @@
       <div class="tl-item go"><div class="tl-time">7:50 AM</div><div class="tl-act">🚆 Kintetsu Limited Express 707 — Kyoto → Kintetsu Nara (arr. 8:25 AM)</div><div class="tl-note"><strong>Ticket No. 3610-1433 · Platform 1</strong><br>Kyoto (B01) → Kintetsu-Nara (A28) · Car 3 · Seats 3A, 3B, 3C<br>Unassigned seats — board Car 3, head upstairs if it's a Vistacar, grab window seats together<br>Hugo free, no ticket needed · 35 min ride</div></div>
       <div class="tl-item"><div class="tl-time">8:25 AM</div><div class="tl-act">Arrive Kintetsu Nara Station</div><div class="tl-note">Pick up BabyCal stroller here if needed. Buy senbei deer crackers from stalls on the way to the park — ¥200/pack, pay cash.</div></div>
       <div class="tl-item"><div class="tl-time">~8:45 AM</div><div class="tl-act">Buy senbei crackers at park entrance stalls before the deer spot you</div><div class="tl-note">Hold them behind your back — deer will surround whoever holds them openly. Distribute among all three of you.</div></div>
-      <div class="tl-item hl"><div class="tl-time">9:00 – 10:30 AM</div><div class="tl-act">🦌 Nara Park deer + 🏯 Todai-ji Temple <a class="map-link" href="https://maps.google.com/?q=Nara+Park+Japan" target="_blank">📍 Nara Park</a> <a class="map-link" href="https://maps.google.com/?q=Todaiji+Temple+Nara" target="_blank">📍 Todai-ji</a></div>
+      <div class="tl-item hl"><div class="tl-time">9:00 – 10:30 AM</div><div class="tl-act">🦌 Nara Park deer + 🏯 Todai-ji Temple <a class="map-link" href="https://maps.google.com/?q=Nara+Park+Japan" target="_blank" rel="noopener noreferrer">📍 Nara Park</a> <a class="map-link" href="https://maps.google.com/?q=Todaiji+Temple+Nara" target="_blank" rel="noopener noreferrer">📍 Todai-ji</a></div>
         <div class="tl-note">Hours: 7:30–17:30. Let him run at the deer first, then enter the temple.</div>
       </div>
     </div>
@@ -545,7 +559,7 @@
     </div>
     <div class="timeline">
       <div class="tl-item go"><div class="tl-time">10:30 – 10:45 AM</div><div class="tl-act">Walk Todai-ji → Kasuga Taisha through the forest (~15 min)</div></div>
-      <div class="tl-item hl"><div class="tl-time">10:45 – 11:30 AM</div><div class="tl-act">⛩ Kasuga Taisha Shrine <a class="map-link" href="https://maps.google.com/?q=Kasuga+Taisha+Shrine+Nara" target="_blank">📍 Map</a></div><div class="tl-note">Lantern-lined stone paths. Hours: 6:30–17:30. Don't add Kofuku-ji on top — too much temple for one morning.</div></div>
+      <div class="tl-item hl"><div class="tl-time">10:45 – 11:30 AM</div><div class="tl-act">⛩ Kasuga Taisha Shrine <a class="map-link" href="https://maps.google.com/?q=Kasuga+Taisha+Shrine+Nara" target="_blank" rel="noopener noreferrer">📍 Map</a></div><div class="tl-note">Lantern-lined stone paths. Hours: 6:30–17:30. Don't add Kofuku-ji on top — too much temple for one morning.</div></div>
       <div class="tl-item eat"><div class="tl-time">11:30 AM – 1:00 PM</div><div class="tl-act">Lunch — family restaurant near Kintetsu Nara</div><div class="tl-note">Slow sit-down. This is the rest window anchor.</div></div>
     </div>
     <div class="shop-block">
@@ -557,7 +571,7 @@
       <div class="tl-item"><div class="tl-time">2:00 – 3:30 PM</div><div class="tl-act">Hotel room time</div><div class="tl-note">Curtains down, tablet, no agenda.</div></div>
       <div class="tl-item eat" style="border-left:3px solid var(--gold)">
         <div class="tl-time">5:30 – 8:00 PM</div>
-        <div class="tl-act">⭐ <strong style="color:var(--gold)">Wagyuyakiniku Toku</strong> — last night in Kyoto <a class="map-link" href="https://maps.google.com/?q=Wagyuyakiniku+Toku+Kyoto+Higashiyama" target="_blank">📍 Map</a></div>
+        <div class="tl-act">⭐ <strong style="color:var(--gold)">Wagyuyakiniku Toku</strong> — last night in Kyoto <a class="map-link" href="https://maps.google.com/?q=Wagyuyakiniku+Toku+Kyoto+Higashiyama" target="_blank" rel="noopener noreferrer">📍 Map</a></div>
         <div class="tl-note">
           <div class="res-box">
             <div class="res-confirmed">✅ RESERVATION CONFIRMED · PAID</div>
@@ -608,9 +622,9 @@
     <div class="timeline">
       <div class="tl-item"><div class="tl-time">6:00 – 7:00 AM</div><div class="tl-act">Breakfast + check-out 22 Pieces Hotel</div></div>
       <div class="tl-item go"><div class="tl-time">7:30 AM</div><div class="tl-act">JR Special Rapid — Kyoto → Osaka Station (28 min, Platform 5/6)</div><div class="tl-note">No reservation needed, runs every 15 min.</div></div>
-      <div class="tl-item go"><div class="tl-time">~8:15 AM</div><div class="tl-act">Midosuji Line → Namba Station (~10 min) → drop bags at Fraser Residence <a class="map-link" href="https://maps.google.com/?q=Fraser+Residence+Osaka+Namba" target="_blank">📍 Fraser</a></div><div class="tl-note">It's a 2-min walk from Namba Station. Leave bags with reception — rooms typically ready by 3–4 PM.</div></div>
+      <div class="tl-item go"><div class="tl-time">~8:15 AM</div><div class="tl-act">Midosuji Line → Namba Station (~10 min) → drop bags at Fraser Residence <a class="map-link" href="https://maps.google.com/?q=Fraser+Residence+Osaka+Namba" target="_blank" rel="noopener noreferrer">📍 Fraser</a></div><div class="tl-note">It's a 2-min walk from Namba Station. Leave bags with reception — rooms typically ready by 3–4 PM.</div></div>
       <div class="tl-item go"><div class="tl-time">~9:00 AM</div><div class="tl-act">Subway: Namba → Tanimachi 4-chome → Tanimachi Line → Tenmabashi (~20 min)</div></div>
-      <div class="tl-item hl"><div class="tl-time">9:00 – 11:30 AM</div><div class="tl-act">🏯 Osaka Castle Park <a class="map-link" href="https://maps.google.com/?q=Osaka+Castle+Park" target="_blank">📍 Map</a></div><div class="tl-note">Wide paved paths for strollers. Castle interior has elevator to rooftop city view. Wide moat circuit is the best bit for kids to run.</div></div>
+      <div class="tl-item hl"><div class="tl-time">9:00 – 11:30 AM</div><div class="tl-act">🏯 Osaka Castle Park <a class="map-link" href="https://maps.google.com/?q=Osaka+Castle+Park" target="_blank" rel="noopener noreferrer">📍 Map</a></div><div class="tl-note">Wide paved paths for strollers. Castle interior has elevator to rooftop city view. Wide moat circuit is the best bit for kids to run.</div></div>
     </div>
     <div class="nature-block">
       <div class="nat-label">🌿 For James</div>
@@ -621,10 +635,10 @@
     </div>
     <div class="rest-block">😴 <div><strong>Rest window on transit 1:00 – 2:30 PM</strong> — subway back to Namba (~20 min). Check in to Fraser (room should be ready or near-ready by now), unpack, room downtime until 4 PM.</div></div>
     <div class="timeline">
-      <div class="tl-item"><div class="tl-time">4:00 – 5:30 PM</div><div class="tl-act">🦑 Dotonbori evening stroll <a class="map-link" href="https://maps.google.com/?q=Dotonbori+Osaka" target="_blank">📍 Map</a></div><div class="tl-note">Glico Man, giant crab, takoyaki stands. Walkable from Fraser.</div></div>
+      <div class="tl-item"><div class="tl-time">4:00 – 5:30 PM</div><div class="tl-act">🦑 Dotonbori evening stroll <a class="map-link" href="https://maps.google.com/?q=Dotonbori+Osaka" target="_blank" rel="noopener noreferrer">📍 Map</a></div><div class="tl-note">Glico Man, giant crab, takoyaki stands. Walkable from Fraser.</div></div>
       <div class="tl-item eat" style="border-left:3px solid var(--gold)">
         <div class="tl-time">6:00 – 7:30 PM</div>
-        <div class="tl-act">⭐ <strong style="color:var(--gold)">Zauo Fishing Restaurant</strong> — catch your own dinner <a class="map-link" href="https://maps.google.com/?q=Zauo+Fishing+Restaurant+Namba+Osaka" target="_blank">📍 Map</a></div>
+        <div class="tl-act">⭐ <strong style="color:var(--gold)">Zauo Fishing Restaurant</strong> — catch your own dinner <a class="map-link" href="https://maps.google.com/?q=Zauo+Fishing+Restaurant+Namba+Osaka" target="_blank" rel="noopener noreferrer">📍 Map</a></div>
         <div class="tl-note">
           <div class="res-box">
             <div class="res-confirmed">✅ RESERVATION CONFIRMED · BOOKED</div>
@@ -638,7 +652,7 @@
     </div>
     <div class="memory-block">
       <div class="mem-label">★ Memory moment</div>
-      <p>Zauo Fishing Restaurant — the fishing rods, the live tank, the moment the fish is caught. Let him hold the rod. The restaurant is theatrical and the food is excellent. First night in Osaka should be a big one.</p>
+      <p>The moment the rod bends and he realises he's actually catching something. The noise, the boat décor, watching the cook take his fish to the kitchen — it's theatrical in a way that makes complete sense to a 4-year-old. He'll ask to go back every time Japan comes up for the next five years.</p>
     </div>
   </div>
 </div>
@@ -662,7 +676,7 @@
     </div>
     <div class="timeline">
       <div class="tl-item go"><div class="tl-time">9:30 AM</div><div class="tl-act">Namba → Midosuji Line → Hommachi → Chuo Line → Osakako Station (~25 min)</div></div>
-      <div class="tl-item kids"><div class="tl-time">10:00 AM</div><div class="tl-act">🦈 Arrive Kaiyukan — doors open <a class="map-link" href="https://maps.google.com/?q=Osaka+Aquarium+Kaiyukan" target="_blank">📍 Map</a></div>
+      <div class="tl-item kids"><div class="tl-time">10:00 AM</div><div class="tl-act">🦈 Arrive Kaiyukan — doors open <a class="map-link" href="https://maps.google.com/?q=Osaka+Aquarium+Kaiyukan" target="_blank" rel="noopener noreferrer">📍 Map</a></div>
         <div class="tl-note">Enter immediately. Walk through Aqua Gate tunnel. Take escalator straight to F8. Admire otters briefly — <strong>keep moving.</strong></div>
         <div class="tl-tags"><span class="tag tag-kids">Kids</span></div>
       </div>
@@ -704,7 +718,7 @@
       <p>Kaiyukan's design is genuinely exceptional — each of the 15 tanks represents a specific Pacific Rim ecosystem. The Japanese Spider Crab tank (enormous), the Antarctic section (penguins above and below ice), the Aleutian Islands section with sea otters. This is a world-class nature experience, not just a kids attraction.</p>
     </div>
     <div class="timeline">
-      <div class="tl-item eat"><div class="tl-time">12:30 – 2:00 PM</div><div class="tl-act">Lunch — Tempozan Marketplace (right next door) <a class="map-link" href="https://maps.google.com/?q=Tempozan+Marketplace+Osaka" target="_blank">📍 Map</a></div><div class="tl-note">Harbour-side, open air. Long slow lunch = rest window anchor.</div></div>
+      <div class="tl-item eat"><div class="tl-time">12:30 – 2:00 PM</div><div class="tl-act">Lunch — Tempozan Marketplace (right next door) <a class="map-link" href="https://maps.google.com/?q=Tempozan+Marketplace+Osaka" target="_blank" rel="noopener noreferrer">📍 Map</a></div><div class="tl-note">Harbour-side, open air. Long slow lunch = rest window anchor.</div></div>
     </div>
     <div class="rest-block">😴 <div><strong>Rest window 2:00 – 3:30 PM</strong> — Tempozan Ferris Wheel (15-min ride, calm, great harbour views) or stroller walk along the waterfront. Low stimulus, fresh air.</div></div>
     <div class="shop-block">
@@ -714,9 +728,9 @@
     <div class="timeline">
       <div class="tl-item go"><div class="tl-time">3:30 PM</div><div class="tl-act">Back to Namba (~25 min)</div></div>
       <div class="tl-item"><div class="tl-time">4:00 – 5:30 PM</div><div class="tl-act">Hotel — rest, freshen up</div><div class="tl-note">He'll be done after a full aquarium day. Room time before dinner.</div></div>
-      <div class="tl-item eat"><div class="tl-time">5:30 – 7:30 PM</div><div class="tl-act">🐙 Dinner — Takoyaki Okoku <a class="map-link" href="https://www.google.com/maps/place/Takoyaki+Okoku/@34.6554941,135.4296761,17z/data=!4m10!1m2!2m1!1sTakoyaki+Okoku+Tempozan+Osaka+1-1-10+Kaigandori+Minato!3m6!1s0x6000e91e0dfa7131:0x589779d57ce00db0!8m2!3d34.6556661!4d135.4323565!15sCjZUYWtveWFraSBPa29rdSBUZW1wb3phbiBPc2FrYSAxLTEtMTAgS2FpZ2FuZG9yaSBNaW5hdG9aOCI2dGFrb3lha2kgb2tva3UgdGVtcG96YW4gb3Nha2EgMSAxIDEwIGthaWdhbmRvcmkgbWluYXRvkgERYnVmZmV0X3Jlc3RhdXJhbnSaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMjFvUjJWWVpGQmhWV3MwWWxkMGNHSjZaR2hoTWxZMVkycE9iRmR1WXhBQuABAPoBBAhIEC0!16s%2Fg%2F11j56h7984?entry=ttu&g_ep=EgoyMDI2MDMxNS4wIKXMDSoASAFQAw%3D%3D" target="_blank">📍 Map</a></div>
+      <div class="tl-item eat"><div class="tl-time">5:30 – 7:30 PM</div><div class="tl-act">🐙 Dinner — Takoyaki Okoku <a class="map-link" href="https://www.google.com/maps/place/Takoyaki+Okoku/@34.6554941,135.4296761,17z/data=!4m10!1m2!2m1!1sTakoyaki+Okoku+Tempozan+Osaka+1-1-10+Kaigandori+Minato!3m6!1s0x6000e91e0dfa7131:0x589779d57ce00db0!8m2!3d34.6556661!4d135.4323565!15sCjZUYWtveWFraSBPa29rdSBUZW1wb3phbiBPc2FrYSAxLTEtMTAgS2FpZ2FuZG9yaSBNaW5hdG9aOCI2dGFrb3lha2kgb2tva3UgdGVtcG96YW4gb3Nha2EgMSAxIDEwIGthaWdhbmRvcmkgbWluYXRvkgERYnVmZmV0X3Jlc3RhdXJhbnSaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMjFvUjJWWVpGQmhWV3MwWWxkMGNHSjZaR2hoTWxZMVkycE9iRmR1WXhBQuABAPoBBAhIEC0!16s%2Fg%2F11j56h7984?entry=ttu&g_ep=EgoyMDI2MDMxNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">📍 Map</a></div>
         <div class="tl-note">Right next to Kaiyukan — no travel needed. <strong>70-min DIY takoyaki buffet</strong> — Hugo flips the balls himself on a table griddle. English menu + staff. Dinner last entry 5:30 PM, ends 8:30 PM. Book ahead or arrive at opening. Course A ¥1,500 (no drinks) · Course B ¥2,300 (free-flow drinks).<br><br>
-        <strong>If Takoyaki Okoku is full or you'd rather be in Namba:</strong> <a class="map-link" href="https://maps.google.com/?q=Teppanyaki+Dohtonbori+Namba+Osaka" target="_blank">📍 Teppanyaki Dohtonbori</a> — cook-your-own okonomiyaki on a table griddle, Dotonbori strip, walkable from Fraser. Either option carries easily to Day 8 if you skip it tonight.</div>
+        <strong>If Takoyaki Okoku is full or you'd rather be in Namba:</strong> <a class="map-link" href="https://maps.google.com/?q=Teppanyaki+Dohtonbori+Namba+Osaka" target="_blank" rel="noopener noreferrer">📍 Teppanyaki Dohtonbori</a> — cook-your-own okonomiyaki on a table griddle, Dotonbori strip, walkable from Fraser. Either option carries easily to Day 8 if you skip it tonight.</div>
       </div>
     </div>
   </div>
@@ -742,7 +756,7 @@
     <div class="warn-banner">⚠️ <span><strong>April 19 is Sunday + pre-Golden Week.</strong> Arrive at 10:00 AM opening. VS Park dropped — skews older, too much after Nifrel.</span></div>
     <div class="timeline">
       <div class="tl-item go"><div class="tl-time">9:00 AM</div><div class="tl-act">Namba → Chuo Line → Cosmosquare (~30–35 min)</div><div class="tl-note">Check Google Maps morning-of for fastest routing.</div></div>
-      <div class="tl-item kids"><div class="tl-time">10:00 AM – 1:00 PM</div><div class="tl-act">🐠 NIFREL <a class="map-link" href="https://maps.google.com/?q=Nifrel+EXPOCITY+Osaka" target="_blank">📍 Map</a></div>
+      <div class="tl-item kids"><div class="tl-time">10:00 AM – 1:00 PM</div><div class="tl-act">🐠 NIFREL <a class="map-link" href="https://maps.google.com/?q=Nifrel+EXPOCITY+Osaka" target="_blank" rel="noopener noreferrer">📍 Map</a></div>
         <div class="tl-note">Hours: 10:00–18:00 (last entry 17:00). Animals in open environments — otters, hippos, capybaras, reptiles, jellyfish. Immersive and atmospheric. Very different from a regular aquarium. <strong>Pre-book tickets.</strong></div>
         <div class="tl-tags"><span class="tag tag-kids">Kids</span></div>
       </div>
@@ -754,7 +768,7 @@
       <strong>Capybara area</strong> — they just sit there being enormous and calm. He can get quite close.</p>
     </div>
     <div class="timeline">
-      <div class="tl-item eat"><div class="tl-time">1:00 – 2:15 PM</div><div class="tl-act">Lunch — EXPOCITY food court <a class="map-link" href="https://maps.google.com/?q=LaLaport+EXPOCITY+Osaka" target="_blank">📍 Map</a></div></div>
+      <div class="tl-item eat"><div class="tl-time">1:00 – 2:15 PM</div><div class="tl-act">Lunch — EXPOCITY food court <a class="map-link" href="https://maps.google.com/?q=LaLaport+EXPOCITY+Osaka" target="_blank" rel="noopener noreferrer">📍 Map</a></div></div>
     </div>
     <div class="rest-block">😴 <div><strong>Rest window 2:15 – 3:30 PM</strong> — Mitsui Shopping Park stroller walk (AC, low stimulation). No agenda.</div></div>
     <div class="shop-block">
@@ -763,8 +777,8 @@
     </div>
     <div class="timeline">
       <div class="tl-item go"><div class="tl-time">3:30 PM</div><div class="tl-act">Transit back to Namba (~35 min)</div></div>
-      <div class="tl-item eat"><div class="tl-time">5:30 – 7:00 PM</div><div class="tl-act">Dinner — Dotonbori / Namba area <a class="map-link" href="https://maps.google.com/?q=Dotonbori+Osaka" target="_blank">📍 Dotonbori</a></div>
-        <div class="tl-note">⏰ <strong>To plan.</strong> If you skipped Takoyaki Okoku on Day 7: <a class="map-link" href="https://maps.google.com/?q=Teppanyaki+Dohtonbori+Namba+Osaka" target="_blank">📍 Teppanyaki Dohtonbori</a> (cook-your-own okonomiyaki) or <a class="map-link" href="https://www.google.com/maps/place/Takoyaki+Okoku/@34.6554941,135.4296761,17z/data=!4m10!1m2!2m1!1sTakoyaki+Okoku+Tempozan+Osaka+1-1-10+Kaigandori+Minato!3m6!1s0x6000e91e0dfa7131:0x589779d57ce00db0!8m2!3d34.6556661!4d135.4323565!15sCjZUYWtveWFraSBPa29rdSBUZW1wb3phbiBPc2FrYSAxLTEtMTAgS2FpZ2FuZG9yaSBNaW5hdG9aOCI2dGFrb3lha2kgb2tva3UgdGVtcG96YW4gb3Nha2EgMSAxIDEwIGthaWdhbmRvcmkgbWluYXRvkgERYnVmZmV0X3Jlc3RhdXJhbnSaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMjFvUjJWWVpGQmhWV3MwWWxkMGNHSjZaR2hoTWxZMVkycE9iRmR1WXhBQuABAPoBBAhIEC0!16s%2Fg%2F11j56h7984?entry=ttu" target="_blank">📍 Takoyaki Okoku</a> (note: 35 min from Namba, back at Tempozan). Otherwise Ichiran ramen, gyoza at Osaka Ohsho, or walk Dotonbori and pick what looks good.</div>
+      <div class="tl-item eat"><div class="tl-time">5:30 – 7:00 PM</div><div class="tl-act">Dinner — Dotonbori / Namba area <a class="map-link" href="https://maps.google.com/?q=Dotonbori+Osaka" target="_blank" rel="noopener noreferrer">📍 Dotonbori</a></div>
+        <div class="tl-note">⏰ <strong>To plan.</strong> If you skipped Takoyaki Okoku on Day 7: <a class="map-link" href="https://maps.google.com/?q=Teppanyaki+Dohtonbori+Namba+Osaka" target="_blank" rel="noopener noreferrer">📍 Teppanyaki Dohtonbori</a> (cook-your-own okonomiyaki) or <a class="map-link" href="https://www.google.com/maps/place/Takoyaki+Okoku/@34.6554941,135.4296761,17z/data=!4m10!1m2!2m1!1sTakoyaki+Okoku+Tempozan+Osaka+1-1-10+Kaigandori+Minato!3m6!1s0x6000e91e0dfa7131:0x589779d57ce00db0!8m2!3d34.6556661!4d135.4323565!15sCjZUYWtveWFraSBPa29rdSBUZW1wb3phbiBPc2FrYSAxLTEtMTAgS2FpZ2FuZG9yaSBNaW5hdG9aOCI2dGFrb3lha2kgb2tva3UgdGVtcG96YW4gb3Nha2EgMSAxIDEwIGthaWdhbmRvcmkgbWluYXRvkgERYnVmZmV0X3Jlc3RhdXJhbnSaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMjFvUjJWWVpGQmhWV3MwWWxkMGNHSjZaR2hoTWxZMVkycE9iRmR1WXhBQuABAPoBBAhIEC0!16s%2Fg%2F11j56h7984?entry=ttu" target="_blank" rel="noopener noreferrer">📍 Takoyaki Okoku</a> (note: 35 min from Namba, back at Tempozan). Otherwise Ichiran ramen, gyoza at Osaka Ohsho, or walk Dotonbori and pick what looks good.</div>
       </div>
     </div>
   </div>
@@ -789,7 +803,7 @@
     </div>
     <div class="timeline">
       <div class="tl-item go"><div class="tl-time">9:00 AM</div><div class="tl-act">Tanimachi 4-chome → Tanimachi Line → Ogimachi (~15 min)</div></div>
-      <div class="tl-item kids"><div class="tl-time">9:30 AM – 1:00 PM</div><div class="tl-act">🧒 Kids Plaza Osaka <a class="map-link" href="https://maps.google.com/?q=Kids+Plaza+Osaka" target="_blank">📍 Map</a></div>
+      <div class="tl-item kids"><div class="tl-time">9:30 AM – 1:00 PM</div><div class="tl-act">🧒 Kids Plaza Osaka <a class="map-link" href="https://maps.google.com/?q=Kids+Plaza+Osaka" target="_blank" rel="noopener noreferrer">📍 Map</a></div>
         <div class="tl-note">Hours: 9:30–17:00. April 20 is Monday — quieter than weekends. Science, role-play, water zone, climbing. Allow 3+ hrs.</div>
         <div class="tl-tags"><span class="tag tag-kids">Kids</span></div>
       </div>
@@ -801,7 +815,7 @@
       <strong>Rooftop adventure area</strong> — net climbing, slides, and Osaka city views. Save this for the last 30 min when energy runs out inside.</p>
     </div>
     <div class="timeline">
-      <div class="tl-item eat"><div class="tl-time">1:00 – 2:30 PM</div><div class="tl-act">🦪 Lunch — Kuromon Ichiba Market <a class="map-link" href="https://maps.google.com/?q=Kuromon+Ichiba+Market+Osaka" target="_blank">📍 Map</a></div>
+      <div class="tl-item eat"><div class="tl-time">1:00 – 2:30 PM</div><div class="tl-act">🦪 Lunch — Kuromon Ichiba Market <a class="map-link" href="https://maps.google.com/?q=Kuromon+Ichiba+Market+Osaka" target="_blank" rel="noopener noreferrer">📍 Map</a></div>
         <div class="tl-note">15-min walk or short subway from Kids Plaza. Osaka's famous covered food market — vendors grill wagyu skewers, scallops, uni, and fresh seafood on the spot. You eat while walking. <strong>Open until ~6 PM but lunch hour is the best time</strong> — stalls fully stocked, chefs actively grilling. James: oysters here. Hugo: grilled scallop or crab stick. Market closes early-ish so Monday lunch is the perfect slot.</div>
       </div>
     </div>
@@ -811,7 +825,7 @@
     </div>
     <div class="rest-block">😴 <div><strong>Rest window 2:30 – 3:30 PM</strong> — stroller ride toward Shinsaibashi. He'll be physically spent after Kids Plaza + market. Transit is the wind-down.</div></div>
     <div class="timeline">
-      <div class="tl-item"><div class="tl-time">3:30 – 5:00 PM</div><div class="tl-act">🛍 Shinsaibashi covered arcade <a class="map-link" href="https://maps.google.com/?q=Shinsaibashi+shopping+street+Osaka" target="_blank">📍 Map</a></div><div class="tl-note">Hours: 11:00–20:00. Cosmetics, fashion, Don Quijote. He rides in the stroller. Gashapon machines at intervals to keep him happy.</div></div>
+      <div class="tl-item"><div class="tl-time">3:30 – 5:00 PM</div><div class="tl-act">🛍 Shinsaibashi covered arcade <a class="map-link" href="https://maps.google.com/?q=Shinsaibashi+shopping+street+Osaka" target="_blank" rel="noopener noreferrer">📍 Map</a></div><div class="tl-note">Hours: 11:00–20:00. Cosmetics, fashion, Don Quijote. He rides in the stroller. Gashapon machines at intervals to keep him happy.</div></div>
     </div>
     <div class="shop-block">
       <div class="shop-label">🛍 For Lynn — Shinsaibashi</div>
@@ -820,7 +834,7 @@
     <div class="timeline">
       <div class="tl-item eat" style="border-left:3px solid var(--gold)">
         <div class="tl-time">5:30 – 8:30 PM</div>
-        <div class="tl-act">⭐ <strong style="color:var(--gold)">Amimoto Honkan (Kani Doraku)</strong> — last night in Osaka <a class="map-link" href="https://maps.google.com/?q=Kani+Doraku+Amimoto+Honkan+Nishi-Shinsaibashi+Osaka" target="_blank">📍 Map</a></div>
+        <div class="tl-act">⭐ <strong style="color:var(--gold)">Amimoto Honkan (Kani Doraku)</strong> — last night in Osaka <a class="map-link" href="https://maps.google.com/?q=Kani+Doraku+Amimoto+Honkan+Nishi-Shinsaibashi+Osaka" target="_blank" rel="noopener noreferrer">📍 Map</a></div>
         <div class="tl-note">
           <div class="res-box">
             <div class="res-confirmed">✅ RESERVATION CONFIRMED · PAID</div>
@@ -852,7 +866,7 @@
   <div class="day-body">
     <div class="timeline">
       <div class="tl-item"><div class="tl-time">Morning</div><div class="tl-act">Breakfast + check-out Fraser Residence</div><div class="tl-note">Last konbini run. Let him pick his snacks for the plane.</div></div>
-      <div class="tl-item go"><div class="tl-time">Departure – 2 hrs</div><div class="tl-act">Namba Station → Nankai Rapi:t → KIX (~40–45 min) <a class="map-link" href="https://maps.google.com/?q=Namba+Nankai+Station+Osaka" target="_blank">📍 Map</a></div><div class="tl-note">The Rapi:t has an unusual sci-fi design — reserved seats, fun for the last ride. Allow 2 hrs before departure for check-in, immigration, security.</div></div>
+      <div class="tl-item go"><div class="tl-time">Departure – 2 hrs</div><div class="tl-act">Namba Station → Nankai Rapi:t → KIX (~40–45 min) <a class="map-link" href="https://maps.google.com/?q=Namba+Nankai+Station+Osaka" target="_blank" rel="noopener noreferrer">📍 Map</a></div><div class="tl-note">The Rapi:t has an unusual sci-fi design — reserved seats, fun for the last ride. Allow 2 hrs before departure for check-in, immigration, security.</div></div>
       <div class="tl-item eat"><div class="tl-time">At KIX</div><div class="tl-act">Last ramen or sushi before boarding 🎌</div></div>
     </div>
   </div>
@@ -863,8 +877,8 @@
 <div style="margin-top:2rem; background:white; border:1px solid var(--border); border-radius:4px; overflow:hidden;">
   <div style="background:var(--ink); color:var(--cream); padding:.65rem 1rem; font-family:'Shippori Mincho',serif; font-size:.88rem; font-weight:700;">📋 Backup Plans & Booking Checklist</div>
   <div class="tabs" style="padding:0 1rem; background:var(--paper); border-bottom:1px solid var(--border);">
-    <button class="tab-btn active" onclick="showTab('notes')">☔ Backup Plans</button>
-    <button class="tab-btn" onclick="showTab('checklist')">✅ Booking Checklist</button>
+    <button class="tab-btn active" onclick="showTab('notes', this)">☔ Backup Plans</button>
+    <button class="tab-btn" onclick="showTab('checklist', this)">✅ Booking Checklist</button>
   </div>
 
   <!-- BACKUP PLANS TAB -->
@@ -1055,11 +1069,11 @@
 <script>
 function tog(id){ document.getElementById(id).classList.toggle('open'); }
 
-function showTab(name) {
+function showTab(name, el) {
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
-  event.target.classList.add('active');
+  el.classList.add('active');
 }
 
 function clToggle(cb) {
@@ -1067,6 +1081,37 @@ function clToggle(cb) {
   if (cb.checked) item.classList.add('cl-done');
   else item.classList.remove('cl-done');
 }
+
+document.querySelectorAll('.day-header').forEach(h => {
+  h.setAttribute('tabindex', '0');
+  h.setAttribute('role', 'button');
+  h.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); h.click(); }
+  });
+});
+
+// Forecast: Open-Meteo, fetched 8 Apr 2026. KIX/Osaka days use Osaka coords; Kyoto days use Kyoto coords.
+const forecast = {
+  d1:  { icon:'⛅', max:22, rain:21 },
+  d2:  { icon:'🌧', max:17, rain:53 },
+  d3:  { icon:'🌧', max:19, rain:45 },
+  d4:  { icon:'🌦', max:22, rain:33 },
+  d5:  { icon:'⛅', max:22, rain:32 },
+  d6:  { icon:'🌦', max:20, rain:30 },
+  d7:  { icon:'🌦', max:25, rain:20 },
+  d8:  { icon:'🌧', max:20, rain:40 },
+  d9:  { icon:'⛅', max:20, rain:31 },
+  d10: { icon:'⛅', max:20, rain:19 }
+};
+Object.entries(forecast).forEach(([id, w]) => {
+  const tags = document.querySelector('#' + id + ' .day-tags');
+  if (!tags) return;
+  const tag = document.createElement('span');
+  tag.className = 'tag tag-wx';
+  tag.title = 'Forecast as of 8 Apr · Open-Meteo';
+  tag.textContent = w.icon + ' ' + w.max + '° · ' + w.rain + '%';
+  tags.appendChild(tag);
+});
 </script>
 </body>
 </html>
